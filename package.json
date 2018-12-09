@@ -1,0 +1,11 @@
+{
+  "name": "aoc2018",
+  "version": "1.0.0",
+  "description": "Advent of Code 2018 ",
+  "main": "index.js",
+  "author": "Carlos Garate <carlos.garate@rangle.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "1.15.3"
+  }
+}
