@@ -56,3 +56,23 @@ exports.compareArrayElements = (arr1, arr2) => {
     return result;
   }
 }
+
+// used in day 3. Helps determine the size of the fabric (array, canvas, etc.)
+exports.largestValueInKey = (arrObjects, key) => {
+  let largest = 0;
+  let edgeLimit = 0;
+  let currentValueEdgeLimit = 0;
+  arrObjects.forEach((obj) => {
+    let currentValue = obj[key];
+    if (key === 'left') {
+      currentValueEdgeLimit = currentValue + obj.width;
+    }
+    if (key === 'top') {
+      currentValueEdgeLimit = currentValue + obj.height;
+    }
+
+    if (currentValue > largest) { largest = currentValue }
+    if (currentValueEdgeLimit > edgeLimit) { edgeLimit = currentValueEdgeLimit }
+  })
+  return {largest, edgeLimit};
+};
