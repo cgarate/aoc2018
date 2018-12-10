@@ -11,7 +11,6 @@ const arrayDataTest = { data: [
 
 const sizeOfWholePieceOfFabric = (arr) => {
   const leftMostStartOfClaim = utils.largestValueInKey(arr, 'left');
-  console.log(leftMostStartOfClaim)
   const bottomMostStartOfClaim = utils.largestValueInKey(arr, 'top');
 
   return {
@@ -57,7 +56,6 @@ const fillInClaims = (theFabric, arrData) => {
 }
 
 claimsFilled = fillInClaims(theFabric, arrData.data);
-// console.log(claimsFilled);
 
 const countOverlaps = (claims) => {
   const result = claims.reduce((acc, row) => {
