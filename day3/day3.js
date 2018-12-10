@@ -38,20 +38,17 @@ theFabric = createPieceOfFabric(sizeOfFabric.arrayNumberOfColumns, sizeOfFabric.
 
 const fillInClaims = (theFabric, arrData) => {
   const result = theFabric.slice();
-  arrData.forEach((claim) => {
-    let claimTop = claim.top;
-    let claimLeft = claim.left;
-    let claimWidth = claim.width;
-    let claimHeight = claim.height;
 
-    for (i = claimTop; i < claimTop + claimHeight; i++) {
-      for (j = claimLeft; j < claimLeft + claimWidth; j++) {
+  arrData.forEach((claim) => {
+    const { top, left, width, height, id } = claim
+    for (i = top; i < top + height; i++) {
+      for (j = left; j < left + width; j++) {
         let currentPosition = result[i][j];
         if (currentPosition !== '.') {
           result[i][j] = 'X';
         }
         else {
-          result[i][j] = claim.id;
+          result[i][j] = id;
         }
       }
     }
@@ -60,6 +57,7 @@ const fillInClaims = (theFabric, arrData) => {
 }
 
 claimsFilled = fillInClaims(theFabric, arrData.data);
+// console.log(claimsFilled);
 
 const countOverlaps = (claims) => {
   const result = claims.reduce((acc, row) => {
@@ -68,5 +66,20 @@ const countOverlaps = (claims) => {
   return result;
 }
 
-const result = countOverlaps(claimsFilled);
-console.log(result);
+const findSingleNonOverlapping = (claims, arrData) => {
+  let nonOverlappedId = "";
+  arrData.forEach((claim) => {
+    const {id, height, width } = claim;
+    const result = claims.reduce((acc, row) => {
+      return acc += row.filter((point => (point === id))).length;
+    }, 0)
+    if (result === (height * width)) {
+      nonOverlappedId = id;
+    }
+  })
+  return nonOverlappedId;
+}
+
+const answerPartOne = countOverlaps(claimsFilled);
+const answerPartTwo = findSingleNonOverlapping(claimsFilled, arrData.data);
+console.log(answerPartOne, answerPartTwo);
